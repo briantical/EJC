@@ -27,44 +27,41 @@ describe('Test User route handlers', () => {
   beforeAll(async () => {
     try {
       await mongoose.connect(DB_URI, options);
-      // console.log('Database (TEST) is now connected');
     } catch (error) {
       console.log('Database connection error');
     }
   });
 
   describe('User insertion operations', () => {
-    it('username should be provided', () => {
+    it('username should be provided', async () => {
       let req = mockRequest();
       req.body.username = null;
       req.body.password = 'password';
       let res = mockResponse();
 
       insertUser(req, res);
-
       expect(res.status).toHaveBeenCalledWith(401);
       expect(res.json).toHaveBeenCalledWith({ message: 'Username is required' });
     });
 
-    it('Password should be provided', () => {
+    it('Password should be provided', async () => {
       let req = mockRequest();
       req.body.username = 'Brian';
       req.body.password = null;
       let res = mockResponse();
 
       insertUser(req, res);
-
       expect(res.status).toHaveBeenCalledWith(401);
       expect(res.json).toHaveBeenCalledWith({ message: 'Password is required' });
     });
 
-    it('Creates a new user', () => {
+    it('Creates a new user', async () => {
       let req = mockRequest();
       req.body.username = 'Brian';
       req.body.password = 'password';
       let res = mockResponse();
 
-      insertUser(req, res);
+      await insertUser(req, res);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({ message: 'User created' });
     });
@@ -73,7 +70,6 @@ describe('Test User route handlers', () => {
   describe('Fetch user operations', () => {
     it('The username should be provided', async () => {
       let req = mockRequest();
-      // req.params.username = null;
       let res = mockResponse();
 
       await fetchUser(req, res);

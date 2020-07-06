@@ -7,6 +7,6 @@ routes.get('/', (req, res) => {
   res.json({ message: 'Welcome to The API Server' });
 });
 routes.post('/user', insertUser);
-routes.get('/user/:username', fetchUser);
+routes.get('/users/:username', fetchUser);
 
 module.exports = routes;
