@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('./../../../src/models');
 const { insertUser, fetchUser } = require('../../../src/routes/handlers');
 
-const DB_URI = 'mongodb://localhost:27017/bonnIIytester';
+const DB_URI = 'mongodb://localhost:27017/ejc_test';
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true
