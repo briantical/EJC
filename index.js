@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const app = require('./src/index');
 
 const PORT = process.env.port || 5000;
-const DB_URI = 'mongodb://localhost:27017/bonny';
+const DB_URI = 'mongodb://briantical:lutbrian96IV*@ds255958.mlab.com:55958/heroku_ln8xkrgn';
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true
