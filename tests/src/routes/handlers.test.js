@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('./../../../src/models');
 const { insertUser, fetchUser } = require('../../../src/routes/handlers');
 
-const DB_URI = 'mongodb://localhost:27017/bonny';
+const DB_URI = 'mongodb://localhost:27017/bonnIIytester';
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -32,7 +32,7 @@ describe('Test User route handlers', () => {
     }
   });
 
-  describe('User insertion operations', () => {
+  describe('Create user operations', () => {
     it('username should be provided', async () => {
       let req = mockRequest();
       req.body.username = null;
@@ -91,6 +91,7 @@ describe('Test User route handlers', () => {
   afterAll((done) => {
     // Closing the DB connection allows Jest to exit successfully.
     try {
+      mongoose.connection.db.dropDatabase();
       mongoose.connection.close();
     } catch (err) {}
     done();

@@ -8,7 +8,8 @@ const insertUser = async (req, res) => {
     } else if (!password) {
       res.status(401).json({ message: 'Password is required' });
     } else {
-      await new User({ username, password });
+      const user = new User({ username, password });
+      await user.save();
       res.status(200).json({ message: 'User created' });
     }
   } catch (err) {
@@ -19,10 +20,10 @@ const insertUser = async (req, res) => {
 const fetchUser = async (req, res) => {
   try {
     if (req.params.username) {
-      const username = req.params.username;
-      const data = await User.findOne({ username: username });
-      console.log(data);
-      const user = { username: data.username, password: data.password };
+      const _username = req.params.username;
+      const data = await User.find({ username: _username });
+      const { username, password } = data[0];
+      const user = { username, password };
       res.status(200).json({ user });
     } else {
       res.status(500).json({ message: 'The username should be provided' });
