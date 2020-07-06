@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const app = require('./src/index');
 
-const PORT = 5000;
+const PORT = process.env.port || 5000;
 const DB_URI = 'mongodb://localhost:27017/bonny';
 const options = {
   useNewUrlParser: true,
