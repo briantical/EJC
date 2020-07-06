@@ -24,12 +24,13 @@ const mockResponse = () => {
 };
 
 describe('Test User route handlers', () => {
-  beforeAll(async () => {
+  beforeAll(async (done) => {
     try {
       await mongoose.connect(DB_URI, options);
       // console.log('Database (TEST) is now connected');
     } catch (error) {
       console.log('Database connection error');
+      done();
     }
   });
 
