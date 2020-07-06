@@ -20,12 +20,10 @@ const fetchUser = async (req, res) => {
   try {
     if (req.params.username) {
       const username = req.params.username;
-      await User.findOne({ username: username }, (err, data) => {
-        if (err) return;
-        console.log(data);
-        const user = { username: data.username, password: data.password };
-        res.status(200).json({ user });
-      });
+      const data = await User.findOne({ username: username });
+      console.log(data);
+      const user = { username: data.username, password: data.password };
+      res.status(200).json({ user });
     } else {
       res.status(500).json({ message: 'The username should be provided' });
     }
