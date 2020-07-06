@@ -22,6 +22,7 @@ const fetchUser = async (req, res) => {
       const username = req.params.username;
       await User.findOne({ username: username }, (err, data) => {
         if (err) return;
+        console.log(data);
         const user = { username: data.username, password: data.password };
         res.status(200).json({ user });
       });
