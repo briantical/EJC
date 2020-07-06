@@ -8,7 +8,7 @@ const options = {
 };
 
 app.listen(process.env.PORT || 5000, () => {
-  console.log(`Server started on ${PORT}`);
+  console.log(`Server started`);
 });
 
 mongoose.connect(DB_URI, options, (error) => {
