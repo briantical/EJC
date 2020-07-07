@@ -40,9 +40,8 @@ jobs:
       - image: circleci/node:current
     steps:
       - run:
-          name: Check directory
           command: |
-            ls "/home/circleci/project/"
+            echo Running test
       - restore_cache:
           key: heroku-already-deployed-{{ .Branch }}-isDeployed
       - run:
