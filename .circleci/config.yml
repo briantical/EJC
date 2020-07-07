@@ -24,7 +24,7 @@ jobs:
     docker:
       - image: circleci/node:current
       - image: circleci/mongo:latest
-    working_directory: ecj
+    working_directory: ~/ecj
     steps:
       - checkout
       - run: pwd
