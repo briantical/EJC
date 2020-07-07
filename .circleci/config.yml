@@ -1,6 +1,8 @@
+# More changes coming
 version: 2.1
 orbs:
   heroku: circleci/heroku@1.0.1
+  coveralls: coveralls/coveralls@1.0.6
 jobs:
   build:
     docker:
@@ -11,4 +13,5 @@ jobs:
       - checkout
       - run: npm install
       - run: npm test
+      - run: npm run coverage
       - heroku/deploy-via-git

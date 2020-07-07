@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 const app = require('./src/index');
+require('dotenv').config();
 
-const DB_URI = 'mongodb://briantical:lutbrian96IV*@ds255958.mlab.com:55958/heroku_ln8xkrgn';
+const DB_USER = process.env.DB_USER;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+
+const DB_URI = `mongodb://${DB_USER}:${DB_PASSWORD}@ds255958.mlab.com:55958/heroku_ln8xkrgn`;
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true
