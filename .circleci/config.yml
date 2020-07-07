@@ -36,6 +36,8 @@ jobs:
       - run: npm test
       - run: npm run coverage
   deploy_to_heroku:
+    docker:
+      - image: circleci/node:current
     steps:
       - restore_cache:
           key: heroku-already-deployed-{{ .Branch }}-isDeployed
