@@ -1,17 +1,67 @@
 # More changes coming
+# version: 2.1
+# orbs:
+#   heroku: circleci/heroku@1.0.1
+#   coveralls: coveralls/coveralls@1.0.6
+# jobs:
+#   build:
+#     docker:
+#       - image: circleci/node:current
+#       - image: circleci/mongo:latest
+#     working_directory: ~/repo
+#     steps:
+#       - checkout
+#       - run: npm install
+#       - run: npm test
+#       - run: npm run coverage
+#       - heroku/deploy-via-git
 version: 2.1
 orbs:
   heroku: circleci/heroku@1.0.1
   coveralls: coveralls/coveralls@1.0.6
 jobs:
-  build:
+  build_project:
     docker:
       - image: circleci/node:current
       - image: circleci/mongo:latest
-    working_directory: ~/repo
     steps:
       - checkout
+      - restore_cache:
+          key: npm-cache-{{ .Branch }}-{{ checksum "package.json "}}
       - run: npm install
+      - save_cache:
+          key: npm-cache-{{ .Branch }}-{{ checksum "package.json "}}
+          paths:
+            - node_modules
       - run: npm test
       - run: npm run coverage
+  deploy_to_heroku:
+    steps:
+      - restore_cache:
+          key: heroku-already-deployed-{{ .Branch }}-isDeployed
+      - run:
+          name: Halt if initial Heroku deploy is done
+          command: |
+            FILE=~/cachedflags/job.deploy_to_heroku.flag
+            if test -f "$FILE"; then
+                echo "$FILE exist"
+                circleci-agent step halt
+            else
+                echo "$FILE doesnt exist"
+            fi
       - heroku/deploy-via-git
+      - save_cache:
+          key: heroku-already-deployed-{{ .Branch }}-isDeployed
+          paths:
+            - ~/cachedflags/job.deploy_to_heroku.flag
+
+workflows:
+  update_project:
+    jobs:
+      - build_project
+  heroku_deploy:
+    jobs:
+      - build_project
+      - deploy_to_heroku:
+        requires:
+          - build
