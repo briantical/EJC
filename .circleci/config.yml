@@ -26,6 +26,7 @@ jobs:
       - image: circleci/mongo:latest
     steps:
       - checkout
+      - run: ls "/home/circleci/project"
       - restore_cache:
           key: npm-cache-{{ .Branch }}-{{ checksum "package.json "}}
       - run: npm install
@@ -39,9 +40,6 @@ jobs:
     docker:
       - image: circleci/node:current
     steps:
-      - run:
-          command: |
-            echo Running test
       - restore_cache:
           key: heroku-already-deployed-{{ .Branch }}-isDeployed
       - run:
