@@ -66,4 +66,4 @@ workflows:
       - build_project
       - deploy_to_heroku:
           requires:
-            - build
+            - build_project
