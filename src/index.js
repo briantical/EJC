@@ -9,5 +9,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', routes);
+console.log('This is the app');
 
 module.exports = app;
