@@ -54,6 +54,7 @@ jobs:
             else
                 echo "$FILE doesnt exist"
             fi
+      - run: ls -la
       - heroku/deploy-via-git
       - save_cache:
           key: heroku-already-deployed-{{ .Branch }}-isDeployed
@@ -70,6 +71,6 @@ workflows:
       - deploy_to_heroku:
           requires:
             - build_project
-          # filters:
-          #   branches:
-          #     only: master
+          filters:
+            branches:
+              only: master
