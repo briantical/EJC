@@ -39,6 +39,7 @@ jobs:
     docker:
       - image: circleci/node:current
     steps:
+      - run: ls "/home/circleci/project/"
       - restore_cache:
           key: heroku-already-deployed-{{ .Branch }}-isDeployed
       - run:
