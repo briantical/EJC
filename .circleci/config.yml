@@ -40,6 +40,7 @@ jobs:
     docker:
       - image: circleci/node:current
     steps:
+      - checkout
       - restore_cache:
           key: heroku-already-deployed-{{ .Branch }}-isDeployed
       - run:
