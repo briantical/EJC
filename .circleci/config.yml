@@ -49,6 +49,8 @@ jobs:
             if test -f "$FILE"; then
                 echo "$FILE exist"
                 circleci-agent step halt
+            elif [ "${CIRCLE_BRANCH}" == "development" ]; then
+                circleci-agent step halt
             else
                 echo "$FILE doesnt exist"
             fi
@@ -68,6 +70,6 @@ workflows:
       - deploy_to_heroku:
           requires:
             - build_project
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
