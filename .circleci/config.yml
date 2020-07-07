@@ -52,7 +52,6 @@ jobs:
             else
                 echo "$FILE doesnt exist"
             fi
-      - run: git init && git add . && git commit -m "Initial commit"
       - heroku/deploy-via-git
       - save_cache:
           key: heroku-already-deployed-{{ .Branch }}-isDeployed
