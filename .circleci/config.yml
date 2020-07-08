@@ -1,26 +1,10 @@
-# More changes coming
-# version: 2.1
-# orbs:
-#   heroku: circleci/heroku@1.0.1
-#   coveralls: coveralls/coveralls@1.0.6
-# jobs:
-#   build:
-#     docker:
-#       - image: circleci/node:current
-#       - image: circleci/mongo:latest
-#     working_directory: ~/repo
-#     steps:
-#       - checkout
-#       - run: npm install
-#       - run: npm test
-#       - run: npm run coverage
-#       - heroku/deploy-via-git
 version: 2.1
 orbs:
   heroku: circleci/heroku@1.0.1
   coveralls: coveralls/coveralls@1.0.6
 jobs:
   build_project:
+    #parallelism: 2
     docker:
       - image: circleci/node:current
       - image: circleci/mongo:latest
